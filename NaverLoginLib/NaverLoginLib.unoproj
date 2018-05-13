@@ -4,10 +4,8 @@
     "Fuse",
     "FuseJS"
   ],
-  "Projects": [
-    "NaverLoginLib/NaverLoginLib.unoproj"
-  ],
   "Includes": [
     "*"
   ]
 }
+
