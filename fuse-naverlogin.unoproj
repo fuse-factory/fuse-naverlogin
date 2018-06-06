@@ -9,5 +9,13 @@
   ],
   "Includes": [
     "*"
-  ]
+  ],
+  "Android": {
+    "SDK": {
+      "BuildToolsVersion": "23.0.0",
+      "CompileVersion": 25,
+      "MinVersion": 10,
+      "TargetVersion": 25
+    }
+  }
 }
