@@ -11,10 +11,6 @@ using Uno.Compiler.ExportTargetInterop;
 [ForeignInclude(Language.Java, "com.nhn.android.naverlogin.OAuthLoginHandler")]
 public class NaverLogin
 {
-	private static string OAUTH_CLIENT_ID = "Y7fuU9kgDacckrJXMWoK";
-    private static string OAUTH_CLIENT_SECRET = "f0sHB90Xkw";
-    private static string OAUTH_CLIENT_NAME = "네이버 아이디로 로그인";
-
 	public NaverLogin()
 	{
 		Lifecycle.Started += Started;
@@ -34,10 +30,10 @@ public class NaverLogin
 	@{
 		OAuthLogin mOAuthLoginModule = OAuthLogin.getInstance();
 		mOAuthLoginModule.init(
-			OAuthSampleActivity.this
-			,OAUTH_CLIENT_ID
-			,OAUTH_CLIENT_SECRET
-			,OAUTH_CLIENT_NAME
+			Activity.getRootActivity()
+			,"Y7fuU9kgDacckrJXMWoK"	//	OAUTH_CLIENT_ID
+			,"f0sHB90Xkw"			//	OAUTH_CLIENT_SECRET
+			,"네이버 아이디로 로그인"		//	OAUTH_CLIENT_NAME
 			//,OAUTH_CALLBACK_INTENT
 			// SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
 		);
@@ -57,7 +53,6 @@ public class NaverLogin
 	[Foreign(Language.Java)]
 	static extern(Android) void OnEnteringInteractive(ApplicationState state)
 	@{
-		AppEventsLogger.activateApp(Activity.getRootActivity());
 	@}
 
 	static extern(!iOS && !Android) void OnEnteringInteractive(ApplicationState state)
@@ -67,7 +62,6 @@ public class NaverLogin
 	[Foreign(Language.Java)]
 	static extern(Android) void OnExitedInteractive(ApplicationState state)
 	@{
-		AppEventsLogger.deactivateApp(Activity.getRootActivity());
 	@}
 
 	static extern(!Android) void OnExitedInteractive(ApplicationState state)
@@ -82,7 +76,7 @@ public class NaverLogin
 	[Foreign(Language.Java)]
 	public extern(Android) void Login(Action<string> onSuccess, Action<string> onError)
 	@{
-		OAuthLogin mOAuthLoginModule = (OAuthLogin)@{NaverLogin:Of(_this)._mOAuthLoginModule:Get(mOAuthLoginModule)};
+		OAuthLogin mOAuthLoginModule = (OAuthLogin)@{NaverLogin:Of(_this)._mOAuthLoginModule:Get()};
 		
 		OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
 			@Override
