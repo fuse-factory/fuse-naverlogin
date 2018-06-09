@@ -2,10 +2,13 @@
   "RootNamespace":"",
   "Packages": [
     "Fuse",
-    "FuseJS"
+    "Fuse.Platform",
+    "Fuse.Scripting",
+    "FuseJS",
+    "Uno.Permissions",
+    "Uno.Threading"
   ],
   "Includes": [
     "*"
   ]
 }
-
