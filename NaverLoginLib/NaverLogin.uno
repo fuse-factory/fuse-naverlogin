@@ -8,7 +8,7 @@ using Uno.Compiler.ExportTargetInterop;
 //[extern(iOS) ForeignInclude(Language.ObjC, "NaverThirdPartyLogin/NaverThirdPartyLogin.h")]
 [extern(iOS) Require("Source.Include", "NaverThirdPartyLogin/NaverThirdPartyLogin.h")]
 [extern(iOS) Require("Cocoapods.Platform.Name", "ios")]
-[extern(iOS) Require("Cocoapods.Platform.Version", "11.4")]
+[extern(iOS) Require("Cocoapods.Platform.Version", "9.0")]
 [extern(iOS) Require("Cocoapods.Podfile.Target", "pod 'naveridlogin-sdk-ios'")]
 [Require("Gradle.Repository","mavenCentral()")]
 [Require("Gradle.Dependency","compile('com.naver.nid:naveridlogin-android-sdk:4.2.0')")]
@@ -100,10 +100,6 @@ public class NaverLogin
 		// 그리고 appName을 파라미터로 전달하여 3rd party OAuth 인증을 요청합니다.
 
     	NaverThirdPartyLoginConnection *tlogin = [NaverThirdPartyLoginConnection getSharedInstance];
-    	//[tlogin setConsumerKey:_mainView.ckeyTextField.text];
-    	//[tlogin setConsumerSecret:_mainView.cSecretTextField.text];
-    	//[tlogin setAppName:_mainView.appNameTextField.text];
-    	//[tlogin setServiceUrlScheme:kServiceAppUrlScheme];
     	[tlogin requestThirdPartyLogin];
 	@}
 
