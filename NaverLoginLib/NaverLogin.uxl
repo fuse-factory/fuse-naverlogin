@@ -1,0 +1,29 @@
+<Extensions Backend="CPlusPlus">
+	<Require Condition="Android" AndroidManifest.ApplicationElement>
+    	<![CDATA[
+    	]]>
+    </Require>
+
+	<Require Condition="iOS" Xcode.Plist.Element>
+    	<![CDATA[
+    		<key>CFBundleURLTypes</key>
+        	<array>
+            	<dict>
+                	<key>CFBundleTypeRole</key>
+                	<string>Editor</string>
+                	<key>CFBundleURLName</key>
+                	<string>com.apps.fusenaverlogin</string>
+                	<key>CFBundleURLSchemes</key>
+                	<array>
+                    	<string>FuseNaverLogin</string>
+                	</array>
+            	</dict>
+        	</array>
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+                <string>naversearchapp</string>
+                <string>naversearchthirdlogin</string>
+            </array>
+        ]]>
+    </Require>
+</Extensions>
