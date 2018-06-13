@@ -3,12 +3,9 @@ using Fuse.Platform;
 using Uno;
 using Uno.Compiler.ExportTargetInterop;
 
-//[extern(iOS) Require("Xcode.FrameworkDirectory", "@('NaverSDKs-iOS':Path)")]
-//[extern(iOS) Require("Xcode.Framework", "@('NaverSDKs-iOS/NaverThirdPartyLogin.framework':Path)")]
-//[extern(iOS) ForeignInclude(Language.ObjC, "NaverThirdPartyLogin/NaverThirdPartyLogin.h")]
 [extern(iOS) Require("Source.Include", "NaverThirdPartyLogin/NaverThirdPartyLogin.h")]
 [extern(iOS) Require("Cocoapods.Platform.Name", "ios")]
-[extern(iOS) Require("Cocoapods.Platform.Version", "11.4")]
+[extern(iOS) Require("Cocoapods.Platform.Version", "9.0")]
 [extern(iOS) Require("Cocoapods.Podfile.Target", "pod 'naveridlogin-sdk-ios'")]
 [Require("Gradle.Repository","mavenCentral()")]
 [Require("Gradle.Dependency","compile('com.naver.nid:naveridlogin-android-sdk:4.2.0')")]
@@ -30,6 +27,7 @@ public class NaverLogin
 	[Foreign(Language.ObjC)]
 	extern(iOS) void Started(ApplicationState state)
 	@{
+		NSLog(@"MyLog: Started");
 		[[NaverThirdPartyLoginConnection getSharedInstance] setIsInAppOauthEnable:YES];
 		[[NaverThirdPartyLoginConnection getSharedInstance] setOnlyPortraitSupportInIphone:YES];
 
@@ -38,7 +36,6 @@ public class NaverLogin
     	[thirdConn setConsumerKey:kConsumerKey];
     	[thirdConn setConsumerSecret:kConsumerSecret];
     	[thirdConn setAppName:kServiceAppName];
-    	NSLog(@"MyLog: Started");
 	@}
 
 	extern(Android) Java.Object _mOAuthLoginModule;
@@ -54,7 +51,7 @@ public class NaverLogin
 			mContext
 			,"Y7fuU9kgDacckrJXMWoK"	//	OAUTH_CLIENT_ID
 			,"f0sHB90Xkw"			//	OAUTH_CLIENT_SECRET
-			,"네이버 아이디로 로그인"		//	OAUTH_CLIENT_NAME
+			,"퓨즈네이버로그인"		//	OAUTH_CLIENT_NAME
 			//,OAUTH_CALLBACK_INTENT
 			// SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
 		);
@@ -95,15 +92,7 @@ public class NaverLogin
 	public extern(iOS) void Login(Action<string> onSuccess, Action<string> onError)
 	@{
 		NSLog(@"MyLog: Login");
-		// NaverThirdPartyLoginConnection의 인스턴스에 
-		// 서비스앱의 url scheme와 consumer key, consumer secret, 
-		// 그리고 appName을 파라미터로 전달하여 3rd party OAuth 인증을 요청합니다.
-
     	NaverThirdPartyLoginConnection *tlogin = [NaverThirdPartyLoginConnection getSharedInstance];
-    	//[tlogin setConsumerKey:_mainView.ckeyTextField.text];
-    	//[tlogin setConsumerSecret:_mainView.cSecretTextField.text];
-    	//[tlogin setAppName:_mainView.appNameTextField.text];
-    	//[tlogin setServiceUrlScheme:kServiceAppUrlScheme];
     	[tlogin requestThirdPartyLogin];
 	@}
 
