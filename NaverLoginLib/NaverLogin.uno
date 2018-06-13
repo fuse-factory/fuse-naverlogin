@@ -120,8 +120,27 @@ public class NaverLogin
 					String tokenType = mOAuthLoginModule.getTokenType(mContext);
 					String state = mOAuthLoginModule.getState(mContext).toString();
 
-					String message = "Login Success. AT:" + accessToken + ", RT:" + refreshToken + ", State:" + state;
+					String message = "Login Success. AT:" + accessToken + ", RT:" + refreshToken + ", ExpiresAt:" + String.valueOf(expiresAt) + ", State:" + state;
 					Log.d("success", message);
+
+					try
+					{
+						String url = "https://openapi.naver.com/v1/nid/me";
+						String response = mOAuthLoginModule.requestApi(mContext, accessToken, url);
+						
+						if (response == null) {
+							Log.d("GetUserProfile", "Fail.");
+						}
+						else 
+						{
+							String length = String.valueOf(response.length());
+							Log.d("GetUserProfile", "response:" + response + ", length:" + length);
+						}
+					} 
+					catch (Exception e) 
+					{
+						Log.d("GetUserProfile", "Fail.");
+					}
 				} 
 				else 
 				{
